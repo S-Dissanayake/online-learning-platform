@@ -1,0 +1,48 @@
+.product-card-link {
+    text-decoration: none;
+}
+
+.card-container {
+    border-radius: 16px !important;
+    box-shadow: #c0c0c0 0px 1px 1px, #c0c0c0 0px 0px 0px 2px !important;
+    cursor: pointer;
+    margin-bottom: 30px !important;
+    text-decoration: none !important;
+}
+
+.dev-container :hover{
+    transform: scale(1.01);
+    transition-timing-function: ease-in;
+    transition: 0.4s
+}
+
+.card-container :hover{
+    transform: scale(1);
+    transition-timing-function: ease-in;
+    transition: 0.4s
+}
+
+.product-card-product-name{
+    font-family: 'Public Sans, sans-serif';
+    font-size: 20px;
+    font-weight: 600 !important;
+    color: #454F5B !important;
+    text-decoration: none !important;
+    padding-bottom: 5px;
+}
+
+.product-price {
+    font-family: 'Public Sans, sans-serif';
+    font-weight: 600 !important;
+    color: #454F5B !important;
+    text-decoration: none;
+}
+
+.old-product-price {
+    font-family: 'Public Sans, sans-serif';
+    font-weight: 600 !important;
+    color: #9AA6B2 !important;
+    text-decoration: none;
+    text-decoration: line-through;
+    margin-left: 10px !important;
+}

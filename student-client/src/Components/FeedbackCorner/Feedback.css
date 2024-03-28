@@ -1,0 +1,45 @@
+  .container-white {
+    width: max-content;
+    cursor: pointer;
+  }
+  .container-blue {
+    width: max-content;
+    color: #186CBF;
+    background-color: #186CBF !important;
+    cursor: pointer;
+  }
+  .feedback-name-typo-white {
+    align-items: center;
+    gap: 75px;
+    padding: 20px 0px;
+    color: #186CBF !important;
+    font-size: 18px;
+    font-weight: 700 !important;
+  }
+  .feedback-content-typo-white {
+    align-items: center;
+    gap: 75px;
+    padding: 20px 0px;
+    color: #6F6F6F !important;
+    font-size: 18px;
+    font-weight: 500 !important;
+  }
+  .feedback-name-typo-blue {
+    align-items: center;
+    gap: 75px;
+    padding: 20px 0px;
+    color: #ffffff ;
+    font-size: 18px;
+    font-weight: 700 !important;
+  }
+  .feedback-content-typo-blue {
+    align-items: center;
+    gap: 75px;
+    padding: 20px 0px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500 !important;
+  }
+
+ 
+  

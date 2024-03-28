@@ -1,0 +1,13 @@
+.dialog {
+ padding: 50px !important;
+
+}
+.dialog-action-no-btn {
+    background-color: #DC3545 !important;
+    color: aliceblue !important;
+}
+
+.dialog-action-yes-btn {
+    background-color: #007C00 !important;
+    color: aliceblue !important;
+}

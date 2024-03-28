@@ -1,0 +1,27 @@
+.contact-container {
+    padding: 30px 0;
+    min-height: 80vh;
+}
+
+.contact-title {
+    color: #ffffff !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+}
+
+.contact-content-typo {
+    color: #ffffff !important;
+    margin: 10px 0 !important;
+    line-height: 1.5rem !important;
+}
+
+.contact-us-whatsapp {
+    text-decoration: none;
+    color: #00E676;
+}
+
+.contact-us-email {
+    text-decoration: none;
+    color: #ffffff;
+}
