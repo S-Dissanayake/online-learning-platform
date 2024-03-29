@@ -104,7 +104,8 @@ export default function LoginView() {
   }
 
   const handleLogout = () => {
-    sessionStorage.removeItem('auth-token');
+    sessionStorage.removeItem('auth-token');    
+    sessionStorage.removeItem('userName');
     router.push('/');
   }
 
