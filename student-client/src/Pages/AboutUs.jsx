@@ -12,13 +12,10 @@ function AboutUs() {
         <Grid container item xs={12}>
             <Typography className='about-us-title'>About Us</Typography>
             <Typography className='about-us-content-typo'>
-                Welcome to Norway Aqua Expert, where the allure of the underwater world meets exceptional service!, we take pride in being your premier destination for all things aquarium-related. As avid enthusiasts ourselves, we've curated an extensive selection of aquatic treasures, ensuring that every visit to our store is an immersive experience.
+            Our online learning platform is committed to revolutionizing education by providing accessible, high-quality learning experiences to learners worldwide. With a diverse range of courses spanning various subjects, disciplines, and skill levels, we empower learners to pursue their educational goals at their own pace and convenience.
             </Typography>
             <Typography className='about-us-content-typo'>
-                At Norway Aqua Expert, we prioritize the health and happiness of your aquatic companions. Our team of knowledgeable and passionate staff is dedicated to providing personalized guidance, from selecting the perfect tank setup to choosing the ideal inhabitants for your underwater haven. With a commitment to quality, we offer a carefully curated range of top-tier products, from state-of-the-art equipment to captivating decorations, to enhance the beauty of your aquatic sanctuary.
-            </Typography>
-            <Typography className='about-us-content-typo'>
-                Discover the extraordinary at Norway Aqua Expert, your trusted partner in creating and maintaining enchanting aquariums. Welcome to a world where every ripple tells a story and every fin dances to its own rhythm.
+            Our platform offers interactive content, engaging multimedia resources, and personalized learning paths to cater to individual learning styles and preferences. We prioritize flexibility, allowing learners to choose from self-paced courses, instructor-led classes, or micro-learning modules. Backed by expert instructors and cutting-edge technology, we strive to create a dynamic learning environment that fosters collaboration, community, and continuous growth. 
             </Typography>
         </Grid>
 
