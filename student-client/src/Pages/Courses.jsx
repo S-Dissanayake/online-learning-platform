@@ -10,7 +10,7 @@ const Courses = () => {
   const [courseList, setCoursetList] = useState([]);
 
   useEffect(() => {
-    fetchInfo();
+    userName && fetchInfo();
   }, [])
   
   
