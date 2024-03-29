@@ -82,12 +82,7 @@ export default function LoginView() {
   }
 
   const login = () => {
-    // this should remove
-    router.push('/');
-    sessionStorage.setItem('auth-token',"sdjlsjldjaskjdajsldlj");
-    // untill this
-
-    axios.post(`${API_URL}/login`, formData)
+    axios.post(`${API_URL}/api/adminLogin`, formData)
     .then(res => {
       if(res.data.error) {
         alert("Please check Email and Password")
