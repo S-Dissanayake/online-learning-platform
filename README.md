@@ -2,6 +2,12 @@
 
 On this platform there are two user interfaces , one is for Students and onther one is for Admin. both users are connecting to same backend server.
 
+    tech stack 
+        Front-end : React.js, Material-UI, 
+        Back-end : Node.js, Express.js
+        Database : MongoDB, Firebase
+
+        
 # Backend
 Getting Started
 
