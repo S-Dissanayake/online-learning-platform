@@ -4,15 +4,16 @@ require("dotenv").config();
 
 const Products = require("../../models/course/course");
 
-router.post(
-    "/api/product/new-product",
+router.post("/",
     async (req, res) => {
       const productNew = new Products({
         name: req.body.name,
         price: req.body.price,
         description: req.body.description,
-        image_url: req.body.imageURL,
+        imageUrl: req.body.imageUrl,
       });
+
+      console.log(" productNew - ", productNew);
   
       try {
         const result = await productNew.save();
@@ -31,6 +32,4 @@ router.post(
       }
     }
 );
-
-
 module.exports = router;

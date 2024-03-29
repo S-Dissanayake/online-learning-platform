@@ -14,12 +14,7 @@ import "./add-products.css";
 import { storage } from "../../../firebase";
 import Snackbar from '../../../components/Snackbar/Snackbar';
 
-
-
-
 export default function ProductsView() {
-
-
   const initialFormValues = {
     name:"",
     price: "",
@@ -32,7 +27,7 @@ export default function ProductsView() {
   }
 
   const[image, setImage]= useState(false);
-  const[productImage, setProductImage]= useState(null);
+  const[courseImage, setCourseImage]= useState(null);
   const[formValues, setFormValues]= useState(initialFormValues);
   const[formErrors, setFormErrors]= useState(initialFormErrors);
   const[imageError, setImageError]= useState(false);
@@ -41,7 +36,7 @@ export default function ProductsView() {
   // function for handle image upload
   const imageHandler = (e) => {
     setImage(true);
-    setProductImage(e.target.files[0]);
+    setCourseImage(e.target.files[0]);
     setImageError(false);
   }
 
@@ -54,19 +49,17 @@ export default function ProductsView() {
     setFormValues(initialFormValues);
     setFormErrors(initialFormErrors);
     setImage(false);
-    setProductImage(null);
+    setCourseImage(null);
     setImageError(false);
   }
 
   const handleSubmit =()=> {
     let tempFormErrors = formErrors;
     let isValidationPass = true;
-
     if(!image) {
       isValidationPass = false;
       setImageError(true);
     };
-
     Object.keys(tempFormErrors).forEach((singleItem) => {
       if(!formValues[singleItem]){
         tempFormErrors = {...tempFormErrors, [singleItem]: true};
@@ -74,9 +67,8 @@ export default function ProductsView() {
       }
     })
     setFormErrors(tempFormErrors);
-
     if(isValidationPass) {
-      submitProductImage(productImage);
+      submitCourseImage(courseImage);
     }else{
       setSnackData({
         text: "Please Fill All Required Fields !",
@@ -86,22 +78,22 @@ export default function ProductsView() {
   }
 
   // Function to add product image into firebase
-  const submitProductImage =(productImg)=> {
-    if (productImg == null) return;
+  const submitCourseImage =(courseImg)=> {
+    if (courseImg == null) return;
 
     const myDate = new Date();
     const formattedDate = format(myDate, 'yyyy-MM-dd HH:mm:ss');
 
-    const imageRef = ref(storage, `images/${formattedDate}${productImg.name}`);
+    const imageRef = ref(storage, `images/${formattedDate}${courseImg.name}`);
 
-    uploadBytes(imageRef, productImg).then((snapshot) => {
+    uploadBytes(imageRef, courseImg).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        submitProductData(url);
+        submitCourseData(url);
       });
     });  
   }  
 
-  const submitProductData =(imgUrl)=> {   
+  const submitCourseData =(imgUrl)=> {   
     const myDate = new Date();
     const payload = {
       name: formValues.name, 
@@ -113,15 +105,15 @@ export default function ProductsView() {
     }
     const token = `Bearer ${sessionStorage.getItem('auth-token')}`;
     const config = { headers: { Authorization: token}}
-    axios.post(`${API_URL}/addProduct`, payload,config)
+    axios.post(`${API_URL}/api/addCourse`, payload, config)
     .then(res => {
       if(res.data.error) {
-        setSnackData({text: "Error on adding product !", variant: "error"})
+        setSnackData({text: "Error on adding course !", variant: "error"})
       } else if(res.data) {
           handleReset();
-          setSnackData({text: "Product Added Sucessfully !", variant: "success"})
+          setSnackData({text: "Course Added Sucessfully !", variant: "success"})
         } else {
-          setSnackData({ text: "Error on adding product !",variant: "error"})
+          setSnackData({ text: "Error on adding course !",variant: "error"})
         }
     })
     .catch(err =>{
@@ -215,7 +207,7 @@ export default function ProductsView() {
               <FormControl>
                 <label htmlFor="fileInput">
                   { image ?
-                    <img className="addproduct-thumbnail-img" src={URL.createObjectURL(productImage)} alt="" height="350px"/>
+                    <img className="addproduct-thumbnail-img" src={URL.createObjectURL(courseImage)} alt="" height="350px"/>
                     :
                     <img className="addproduct-thumbnail-img" src={imageError ? UploadAreaRed : UploadArea} alt="" height="150px"/>
                   }                      
