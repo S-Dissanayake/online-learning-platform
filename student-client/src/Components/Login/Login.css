@@ -10,3 +10,13 @@
     text-transform: capitalize !important;
     padding: '0px' !important;
 }
+
+.logout-yes-btn {
+    color: #ffffff !important;
+    background-color: rgb(25, 25, 219) !important;
+}
+
+.logout-no-btn {
+    color: #ffffff !important;
+    background-color: #dd2020 !important;
+}

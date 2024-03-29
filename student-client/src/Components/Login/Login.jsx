@@ -24,17 +24,12 @@ import './Login.css'
 export default function LoginView() {
 
   const router = useRouter();
-
-  // const [isLogin,setIsLogin] = useState(true);   
+  const storedtoken = sessionStorage.getItem('auth-token');
+ 
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [formData,setFormData] = useState({name:"", email:"", password:""});
+  const [formData,setFormData] = useState({name:"", email:"", password:"", userType: "STUDENT"});
   const [formErrors,setFormErrors] = useState({name:false, email:false, password:false});
-  
-  useEffect(() => {
-    sessionStorage.clear("jwt-token")
-  }, [])
-  
 
   const changeHandler = (e) => {
     setFormData({...formData,[e.target.name]:e.target.value});
@@ -62,23 +57,22 @@ export default function LoginView() {
   }
 
   const signup = () => {
-    axios.post(`${API_URL}/signup`, formData)
-    .then(res => {
+    axios.post(`${API_URL}/api/register`, formData)
+    .then(res => {      
       if(res.data.error) {
         alert("Please check your Email and Password")
       }else if(res.data.signup) {
-          sessionStorage.setItem('auth-token',res.token);
+          sessionStorage.setItem('auth-token',res.data.token);
           router.push('/');
-          alert(res.data.msg);
         } else {
           alert("Error on signup")
-        }
+      }
     })
     .catch(err => console.log(err));
   }
 
   const login = () => {
-    axios.post(`${API_URL}/login`, formData)
+    axios.post(`${API_URL}/api/login`, formData)
     .then(res => {
       if(res.data.error) {
         alert("Please check Email and Password")
@@ -92,9 +86,16 @@ export default function LoginView() {
     .catch(err => console.log(err));
   }
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('auth-token');
+    router.push('/');
+  }
+
   const renderForm = (
     <>
       <Stack spacing={3}>
+        <Typography variant="h4" sx={{ mb: '10px', textAlign: 'center', color: '#0C44AE'}}>Online Learning Platform</Typography>
+        <Typography variant="h6" sx={{ mb: '50px', textAlign: 'center'}}>{isLogin ? 'Login': 'Sign Up'} as Student</Typography>
         {!isLogin?
           <TextField 
             name="name" 
@@ -147,13 +148,27 @@ export default function LoginView() {
         size="large"
         type="submit"
         variant="contained"
-        onClick={()=> {handleBtnClick();console.log("sfkjhfksh");}}
+        onClick={()=> {handleBtnClick()}}
         sx={{mt:"2rem", color: '#ffffff'}}
       >
         {isLogin ? <Typography> Login</Typography>: <Typography>Sign Up</Typography>}
       </LoadingButton>
     </>
   );
+
+  const logoutConfirmation = (
+    <>
+      <Stack spacing={3} sx={{m: '40px 0'}}>        
+        <Typography variant="h4" sx={{ mb: '10px', textAlign: 'center', color: '#0C44AE'}}>Online Learning Platform</Typography>
+        <Typography variant="h5" sx={{ mb: '10px', textAlign: 'center'}}> Do you want logout ?</Typography>
+        <Stack spacing={3} direction='row' justifyContent='center'>
+          <Button className='logout-yes-btn' onClick={()=> {handleLogout()}}> Yes </Button>
+          <Button className='logout-no-btn' onClick={()=> {router.push('/');}}> No </Button>
+        </Stack>        
+      </Stack>
+    </>
+    
+  )
 
   return (
     <Box className="login-container">
@@ -165,9 +180,13 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4" sx={{ mb: '10px', textAlign: 'center', color: '#0C44AE'}}>Online Learning Platform</Typography>
-          <Typography variant="h6" sx={{ mb: '50px', textAlign: 'center'}}>{isLogin ? 'Login': 'Sign Up'} as Student</Typography>
-          {renderForm}
+          {storedtoken? 
+              logoutConfirmation
+            : 
+            <>
+              {renderForm}
+            </>          
+          }
         </Card>
       </Stack>
     </Box>

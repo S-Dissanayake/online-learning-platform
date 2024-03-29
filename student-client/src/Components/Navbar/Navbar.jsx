@@ -3,6 +3,7 @@ import './Navbar.css'
 import { Link, NavLink } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import logo from '../Assets/nav-logo.png'
+import login from '../Assets/nav-login.png'
 
 import { useRouter } from '../../routes/hooks/use-router'
 
@@ -42,9 +43,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-login">
-        <Button className="nav-login-btn" onClick={()=> {loginOnclickHandler()}}>
-          {isLogedin ? "logout" : "sign in"}
-        </Button>
+        <img src={login} alt="login" height={'35px'} onClick={()=> {loginOnclickHandler()}}/>
       </div>
     </nav>
   )
