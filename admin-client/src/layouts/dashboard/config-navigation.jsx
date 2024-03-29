@@ -8,25 +8,25 @@ const icon = (name) => (
 
 const navConfig = [
   {
-    title: 'product list',
+    title: 'course list',
     path: '/',
     icon: icon('ic_cart'),
   },
   {
-    title: 'Add Product',
+    title: 'Add Course',
     path: '/addProduct',
     icon: icon('ic_addCart'),
+  },
+  {
+    title: 'Student Management',
+    path: '/studentManagement',
+    icon: icon('ic_lock'),
   },
   {
     title: 'log out',
     path: '/login',
     icon: icon('ic_lock'),
   },
-  // {
-  //   title: 'Not found',
-  //   path: '/404',
-  //   icon: icon('ic_disabled'),
-  // },
 ];
 
 export default navConfig;

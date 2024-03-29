@@ -7,6 +7,7 @@ export const IndexPage = lazy(() => import('src/pages/products'));
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export const AddProduct = lazy(() => import('src/pages/addProduct'));
+export const StudentManagement = lazy(() => import('src/pages/studentManagement'));
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,7 @@ export default function Router() {
       children: [
         { element: <IndexPage />, index: true },
         { path: 'addProduct', element: <AddProduct />, index: true },
+        { path: 'studentManagement', element: <StudentManagement />, index: true },
       ],
     },
     {

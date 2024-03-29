@@ -6,7 +6,7 @@ function AddProduct() {
   return (
     <>
       <Helmet>
-        <title> Add Products </title>
+        <title> Add Course </title>
       </Helmet>
 
       <AddProducts />

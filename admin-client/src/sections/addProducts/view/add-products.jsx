@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import { ref, uploadBytes, getDownloadURL,  } from "firebase/storage";
 
-import {Grid, Button, Switch, MenuItem , Container, TextField, Typography, FormControl, OutlinedInput,  InputAdornment, FormControlLabel,  } from '@mui/material';
+import {Grid, Button, Container, TextField, Typography, FormControl, OutlinedInput,  InputAdornment} from '@mui/material';
 
 import { API_URL } from 'src/utils/API';
 
@@ -18,59 +18,16 @@ import Snackbar from '../../../components/Snackbar/Snackbar';
 
 
 export default function ProductsView() {
-  const Categories = [
-    {
-      value: 'Discus',
-      label: 'Discus',
-    },
-    {
-      value: 'Arowana',
-      label: 'Arowana',
-    },
-    {
-      value: 'Angel',
-      label: 'Angel',
-    },
-    {
-      value: 'Gourami',
-      label: 'Gourami',
-    },
-    {
-      value: 'Platty',
-      label: 'Platty',
-    },
-    {
-      value: 'Tetra',
-      label: 'Tetra',
-    },
-    {
-      value: 'Flower Horn',
-      label: 'Flower Horn',
-    },
-    {
-      value: 'Ramirez',
-      label: 'Ramirez',
-    },
-    {
-      value: 'Other',
-      label: 'Other',
-    },
-  ];
+
 
   const initialFormValues = {
     name:"",
-    category:"Discus",
     price: "",
-    oldPrice: "",
     description:"",
-    favorite: false,
-    sale: false,
-    outOfStock: false
   }
 
   const initialFormErrors = {
     name:false, 
-    category:false, 
     price: false,
   }
 
@@ -91,10 +48,6 @@ export default function ProductsView() {
   const handleFormValues =(e)=> {
     setFormValues({...formValues, [e.target.name]: e.target.value});
     setFormErrors({...formErrors, [e.target.name]: false});
-  }
-
-  const handleToggleSwitchChange =(e, value)=> {
-    setFormValues({...formValues, [e.target.name]: value});
   }
 
   const handleReset=()=> {
@@ -152,16 +105,11 @@ export default function ProductsView() {
     const myDate = new Date();
     const payload = {
       name: formValues.name, 
-      category: formValues.category, 
       price: parseFloat(formValues.price), 
-      oldPrice: parseFloat(formValues.oldPrice), 
       description: formValues.description, 
       imageUrl: imgUrl, 
       createdDate: format(myDate, 'yyyy-MM-dd HH:mm:ss'), 
       latestUpdatedDate: format(myDate, 'yyyy-MM-dd HH:mm:ss'), 
-      favorite: formValues.favorite, 
-      sale: formValues.sale, 
-      outOfStock: formValues.outOfStock
     }
     const token = `Bearer ${sessionStorage.getItem('auth-token')}`;
     const config = { headers: { Authorization: token}}
@@ -193,7 +141,7 @@ export default function ProductsView() {
         handleReset={()=>handleSnackReset()} 
       />
       <Typography variant="h4" className='titile-typo'>
-        Add Product
+        Add Course
       </Typography>
 
       <form>
@@ -202,7 +150,7 @@ export default function ProductsView() {
             <Grid item container xs={12}>
               <FormControl sx={{ mr: 1 }} fullWidth>
                 <p className='form-label'> 
-                  Product Name 
+                  Course Name 
                   <Typography className='required-red-star'>*</Typography>
                 </p> 
                 <TextField 
@@ -215,71 +163,6 @@ export default function ProductsView() {
                   error={formErrors.name}
                 />       
               </FormControl>
-            </Grid>
-            
-            {/* category */}
-            <Grid item container>
-              <Grid container item  xs={12} md={6} direction='column'>
-                <FormControl sx={{ mr: 1 }}>
-                  <p className='form-label'> 
-                    Product Category
-                    <Typography className='required-red-star'>*</Typography>
-                  </p> 
-                  <TextField
-                    name='category'
-                    id="outlined-select-category"
-                    className='form-text-field'
-                    select
-                    defaultValue="Discus"
-                    value={formValues?.category}
-                    onChange={(e)=> {handleFormValues(e)}}
-                    error={formErrors.category}
-                  >
-                    {Categories.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </FormControl>
-              </Grid>
-            </Grid>
-
-            {/* Toggle */}
-            <Grid container item xs={12} className='toggle-switch-container'>
-              <FormControlLabel 
-                control={
-                  <Switch 
-                    name='favorite'
-                    checked={formValues.favorite} 
-                    onChange={(e)=> {handleToggleSwitchChange(e,!formValues.favorite)}}
-                  />} 
-                labelPlacement="end"
-                label="Favorite"
-                className='toggle-switch-favorite'
-              />
-              <FormControlLabel control={
-                <Switch 
-                  name='sale'
-                  checked={formValues.sale}
-                  color="secondary"
-                  onChange={(e)=> {handleToggleSwitchChange(e,!formValues.sale)}}
-                />} 
-                labelPlacement="end"
-                label="Sale" 
-                className='toggle-switch-sale'
-              />
-              <FormControlLabel control={
-                <Switch 
-                  name='outOfStock'
-                  checked={formValues.outOfStock}
-                  color="warning"
-                  onChange={(e)=> {handleToggleSwitchChange(e,!formValues.outOfStock)}}
-                />} 
-                labelPlacement="end"
-                label="Out of Stock"
-                className='toggle-switch-outOfStock'
-              />              
             </Grid>
 
             {/* Price */}
@@ -294,7 +177,7 @@ export default function ProductsView() {
                   name='price'
                   className='form-text-field'
                   id="outlined-adornment-price"
-                  startAdornment={<InputAdornment position="start">NOK</InputAdornment>}
+                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
                   value={formValues?.price}
                   type='number'
                   onChange={(e)=> {handleFormValues(e)}}
@@ -302,26 +185,11 @@ export default function ProductsView() {
                 />
               </FormControl>
               </Grid>
-              <Grid container item  xs={12} md={6} direction='column' alignItems='flex-end'>
-              {formValues.sale && ( <FormControl sx={{ mr: 1 }}>
-                  <p className='form-label-old-price'> Old Price </p>
-                  <OutlinedInput
-                    name='oldPrice'
-                    className='form-text-field'
-                    id="outlined-adornment-old-price"
-                    startAdornment={<InputAdornment position="start">NOK</InputAdornment>}
-                    value={formValues?.oldPrice}
-                    type='number'
-                    onChange={(e)=> {handleFormValues(e)}}
-                  />
-                </FormControl>
-              )}
-              </Grid>
             </Grid>
 
             <Grid item container xs={12}>
               <FormControl sx={{ mr: 1 }} fullWidth>
-                <p className='form-label'> Product Description </p>
+                <p className='form-label'> Course Description </p>
                 <TextField
                   name='description'
                   id="outlined-multiline-static"
@@ -365,7 +233,7 @@ export default function ProductsView() {
               onClick={()=>{handleSubmit()}}
               className='add-product-btn'
               >
-                Add Product
+                Add Course
             </Button>
             <Button 
               sx={{m:"2rem 1rem 0 0", minWidth: "10rem"}}

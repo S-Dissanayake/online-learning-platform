@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
@@ -12,20 +11,17 @@ import { DeleteProduct } from 'src/sections/deleteProduct';
 import { UpdateProduct } from 'src/sections/updateProduct/view';
 
 import ProductCard from '../product-card';
-import ProductFilters from '../product-filters';
 import Snackbar from "../../../components/Snackbar/Snackbar";
 
 // ----------------------------------------------------------------------
 
 export default function ProductsView() {
-  const [openFilter, setOpenFilter] = useState(false);
   const [productList, setProductList] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [productDetailsForDelete, setProductDetailsForDelete] = useState({});
   const [productDetailsForEdit, setProductDetailsForEdit] = useState({});
   const[snackData, setSnackData]= useState({text: "", variant: ""});
-  const[selectedfilterCategory, setSelectedfilterCategory]= useState("All");
 
   useEffect(() => {
     getAllProducts();
@@ -53,41 +49,9 @@ export default function ProductsView() {
       }
     })
     .catch(err => console.log(err));
-  }
 
-  const getProductsByCategory =(category)=> {
-    const payload = {
-      productCategory : category
-    }
-    axios.post(`${API_URL}/getProductsByCategory`, payload)
-    .then(res => {
-      if(res.data.error) {
-        alert("Error on get Favorite Products")
-      } else if(res.data) {
-        setProductList(res.data);
-      } else {
-        alert("Error on get Favorite Products")
-      }
-    })
-    .catch(err => console.log(err));
-  }
+    setProductList(dummy_data);
 
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const handleFilterOptions = (category) => {
-    setSelectedfilterCategory(category)
-    if(category === "All"){
-      getAllProducts();
-    }else{
-      getProductsByCategory(category);
-    }
   }
 
   const handleSnackReset = () => {
@@ -122,27 +86,8 @@ export default function ProductsView() {
       }    
       <Container>
         <Typography variant="h4" sx={{ mb: 2, mt: 3 }}>
-          Product List
+          Course List
         </Typography>
-
-        <Stack
-          direction="row"
-          alignItems="center"
-          flexWrap="wrap-reverse"
-          justifyContent="flex-end"
-          sx={{ mb: 5 }}
-        >
-          <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ProductFilters
-              openFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-              handleClearAllBtn={() => handleFilterOptions("All")}
-              handleSelectedRadioBtn={(value) => handleFilterOptions(value)}
-              selectedfilterCategory={selectedfilterCategory}
-            />
-          </Stack>
-        </Stack>
 
         <Grid container spacing={3}>
           {productList.map((product) => (
@@ -159,3 +104,31 @@ export default function ProductsView() {
     </>
   );
 }
+
+
+const dummy_data = [
+  {
+    id: 1,
+    name: 'fsdfhk',
+    imageUrl: '',
+    price: "20.00"
+  },
+  {
+    id: 2,
+    name: 'fsdfhk',
+    imageUrl: '',
+    price: "20.00"
+  },
+  {
+    id: 3,
+    name: 'fsdfhk',
+    imageUrl: '',
+    price: "20.00"
+  },
+  {
+    id: 4,
+    name: 'fsdfhk',
+    imageUrl: '',
+    price: "20.00"
+  },
+]

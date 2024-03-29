@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -11,55 +10,12 @@ import Typography from '@mui/material/Typography';
 import editIcon from 'src/assets/Icons/edit.svg';
 import deleteIcon from 'src/assets/Icons/delete.svg';
 
-import Label from 'src/components/label';
-
 import './product-card.css';
 
 // ----------------------------------------------------------------------
 
 export default function ShopProductCard({ product, handleEditClickedProduct, handleDeleteClickedProduct }) {
 
-  const [status, setStates] = useState(null);
-
-  useEffect(() => {
-    if(product.outOfStock){
-      setStates("outOfStock")
-    }else if(!product.outOfStock && product.sale){
-      setStates("sale")
-    }   
-  },[product])
-
-  const saleLabel =(
-    <Label
-      variant="filled"
-      color='info'
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
-    >
-      Sale
-    </Label>
-  )
-
-  const outOfStockLabel =(
-    <Label
-      variant="filled"
-      color='error'
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
-    >
-      Out of Stock
-    </Label>
-  )
 
   const renderImg = (
     <Box
@@ -78,18 +34,7 @@ export default function ShopProductCard({ product, handleEditClickedProduct, han
 
   const renderPrice = (
     <Typography variant="subtitle1">
-      NOK {product.price}
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{
-          color: 'text.disabled',
-          textDecoration: 'line-through',
-          marginLeft: '10px'
-        }}
-      >
-        {product.oldPrice && `NOK ${product.oldPrice}`}
-      </Typography>
+      $ {product.price}
     </Typography>
   );
 
@@ -126,8 +71,6 @@ export default function ShopProductCard({ product, handleEditClickedProduct, han
     <div className='div-container'>
     <Card className='product-card-container'>
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        {status === "outOfStock" && outOfStockLabel}
-        {status === "sale" && saleLabel}
         {renderImg}
       </Box>
 
