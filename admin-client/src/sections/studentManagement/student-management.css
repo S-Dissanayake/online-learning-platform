@@ -1,0 +1,64 @@
+.titile-typo {
+    margin: 1rem 0 2rem 0;
+}
+.form-left-container {
+    padding: 5px 10px 20px 0;
+}
+.form-label {
+    color: #2A2A2A;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 1rem 0 0.5rem 0 !important;
+    display: inline-flex;
+}
+
+.required-red-star {
+    font-size: 20px;
+    margin-left: 5px;
+    margin-top: -3px;
+    color: red !important;
+}
+
+.form-text-field {
+    margin-right: 0rem !important
+}
+
+.add-student-btn {
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.add-submit-student-btn {
+    padding: 10px 0;
+    
+    margin:1rem 1rem 0 0;
+    min-width: 10rem !important 
+}
+
+.cancel-btn {
+    padding: 10px 0;
+    margin:1rem 1rem 0 0;
+    min-width: 10rem !important 
+}
+.student-table-titile {
+    padding: 10px;
+    border: 1px solid #949393;
+    border-radius: 16px;
+    margin: 5px;
+}
+
+.student-table {
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 16px;
+    margin: 5px;
+}
+
+.edit-icon{
+    margin-right: 10px !important;
+    cursor: pointer;
+}
+
+.delete-icon{
+    cursor: pointer;
+}
