@@ -1,5 +1,5 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 import Box from '@mui/material/Box';
@@ -8,56 +8,43 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Grid  from '@mui/material/Grid';
 
-import { fCurrency } from '../../utils/format-number';
+import { API_URL } from '../../utils/API';
 
-import Label from '../label/index';
+import { fCurrency } from '../../utils/format-number';
+import { useRouter } from '../../routes/hooks/use-router';
 import "./product-card.css";
+import { Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export default function ShopProductCard({ product }) {
+export default function ShopProductCard({ product, callingFromMyList }) {
+  const router = useRouter();
 
-  const [status, setStates] = useState(null);
+  const jwtToken = sessionStorage.getItem('auth-token');
+  const userName = sessionStorage.getItem('userName');
 
-  useEffect(() => {
-    if(product.outOfStock){
-      setStates("outOfStock")
-    }else if(!product.outOfStock && product.sale){
-      setStates("sale")
-    }   
-  },[product])
+  const joinBtnOnclick = () => {
+    console.log("jwtToken", jwtToken);
 
-  const saleLabel =(
-    <Label
-      variant="filled"
-      color='info'
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
-    >
-      Sale
-    </Label>
-  )
+    if (jwtToken) {
+      addCourseToList(product);
+    } else {
+      router.push('/login');
+    }
+  }
 
-  const outOfStockLabel =(
-    <Label
-      variant="filled"
-      color='error'
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
-    >
-      Out of Stock
-    </Label>
-  )
+  const addCourseToList = (product) => {
+    console.log("product ", product);
+    axios.put(`${API_URL}/api/coursesByStudent/updateCourseList/${userName}`,product).then(res => {      
+      if(res.data.error) {
+        alert("Error on update Course List")
+      }else if(res.data) {
+        } else {
+          alert("Error on update Course List")
+      }
+    })
+    .catch(err => console.log(err));
+  }
 
   const renderImg = (
     <Box
@@ -88,12 +75,12 @@ export default function ShopProductCard({ product }) {
 
   return (
     <div className='dev-container'>
-    <Link to='/product' state={{data: product}} className='product-card-link'>
+    
     <Card className='card-container'>
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        {status === "outOfStock" && outOfStockLabel}
-        {status === "sale" && saleLabel}
+        <Link to='/product' state={{data: product}} className='product-card-link'>
         {renderImg}
+        </Link>
       </Box>
 
       <Grid spacing={2} sx={{ p: 2 }}>
@@ -101,10 +88,18 @@ export default function ShopProductCard({ product }) {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           {renderPrice}
+          {!callingFromMyList && 
+            <Button 
+              className='join-btn'
+              onClick={()=>{joinBtnOnclick()}}
+            >
+              join
+            </Button>
+          }          
         </Stack>
       </Grid>
     </Card>
-    </Link>
+
     </div>
   );
 }

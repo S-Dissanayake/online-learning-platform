@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Carousel from '../Components/Carousel/Carousel'
-import Popular from '../Components/Popular/Popular'
 import NewCollections from '../Components/NewCollections/NewCollections'
 import FeedbackCorner from '../Components/FeedbackCorner/FeedbackCorner'
 
 function Home() {
-    const [popular, setPopular] = useState([]);
-    const [newcollection, setNewCollection] = useState([]);
+    const [newcourses, setNewCourses] = useState([]);
 
-    const fetchInfo = () => {
-        axios.get('http://localhost:8800/getFavoriteProducts')
+    const fetchInfo = () => {        
+        axios.get('http://localhost:8800/api/course/getAllCoursesList')
         .then(res => {
           if(res.data.error) {
-            alert("Error on get Favorite Products")
+            alert("Error on get Latest Courses")
           } else if(res.data) {
-            setPopular(res.data);
+            setNewCourses(res.data.result);
             } else {
-                alert("Error on get Favorite Products")
-            }
-        })
-        .catch(err => console.log(err));
-        
-        axios.get('http://localhost:8800/getLatestArrivalProducts')
-        .then(res => {
-          if(res.data.error) {
-            alert("Error on get Latest Arrival Products")
-          } else if(res.data) {
-            setNewCollection(res.data);
-            } else {
-                alert("Error on get Latest Arrival Products")
+                alert("Error on get Latest Courses")
             }
         })
         .catch(err => console.log(err));
@@ -43,8 +29,7 @@ function Home() {
     return (
         <div>
             <Carousel/>
-            <NewCollections data={newcollection}/>
-            <Popular data={popular}/>
+            <NewCollections data={newcourses}/>
             <FeedbackCorner/>      
         </div>
     )

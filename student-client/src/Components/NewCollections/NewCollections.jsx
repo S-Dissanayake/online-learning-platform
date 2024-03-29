@@ -6,12 +6,12 @@ import ProductCard from '../ProductCard/product-card'
 const NewCollections = (props) => {
   return (
     <Container className='new-collections'>
-      <Typography className='title-typo'>Latest Arrival Products</Typography>
+      <Typography className='title-typo'>Latest Courses</Typography>
       <Grid container item className="collections" spacing={4}>
         {props.data.map((item,i)=>{
           return (
-            <Grid item key={item.id} xs={12} sm={6} md={3}>
-              <ProductCard product={item}/>
+            <Grid item key={i} xs={12} sm={6} md={3}>
+              <ProductCard product={item} callingFromMyList={false}/>
             </Grid>           
           )
           })

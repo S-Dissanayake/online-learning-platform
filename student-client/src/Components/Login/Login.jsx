@@ -63,6 +63,8 @@ export default function LoginView() {
         alert("Please check your Email and Password")
       }else if(res.data.signup) {
           sessionStorage.setItem('auth-token',res.data.token);
+          sessionStorage.setItem('userName',res.data.user.name);
+          createCourseListforStudent(res.data.user.name);
           router.push('/');
         } else {
           alert("Error on signup")
@@ -78,9 +80,24 @@ export default function LoginView() {
         alert("Please check Email and Password")
       } else if(res.data.login) {
         sessionStorage.setItem('auth-token',res.data.token);
+        sessionStorage.setItem('userName',res.data.user.name);
         router.push('/');
       } else {
         alert("Please check Email and Password")
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  const createCourseListforStudent = (userName)=> {
+    axios.post(`${API_URL}/api/coursesByStudent/createCourseList/`, {"userName": userName})
+    .then(res => {
+      if(res.data.error) {
+        alert("Error on creating Course List")
+      } else if(res.data) {
+
+      } else {
+        alert("Error on creating Course List")
       }
     })
     .catch(err => console.log(err));

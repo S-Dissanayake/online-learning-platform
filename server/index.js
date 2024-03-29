@@ -42,12 +42,14 @@ const loginRoute = require("./routes/userService/login");
 const adminLoginRoute = require("./routes/userService/adminLogin");
 const userRoutes = require("./routes/userService/user");
 const courseRoutes = require("./routes/courseService/course");
+const coursesByStudentRoutes = require("./routes/coursesByStudent/courses");
 
 app.use("/api/register", registerRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/adminLogin", adminLoginRoute);
 app.use("/api/user", userRoutes);
 app.use("/api/course/", courseRoutes);
+app.use("/api/coursesByStudent/", coursesByStudentRoutes);
 
 app.listen(8800, ()=>{
     console.log("Connected to backend !")

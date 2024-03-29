@@ -46,3 +46,9 @@
     text-decoration: line-through;
     margin-left: 10px !important;
 }
+
+.join-btn {
+    color: beige !important;
+    background-color: rgb(59, 173, 55) !important;
+    border-radius: 5px !important;
+}
