@@ -75,6 +75,21 @@ admin - Deleting selected Course
 
 ![image](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/ad09468f-8032-4e89-9987-e7ffbd6aced7)
 
+.
+.
+
+Student - home page
+
+![screencapture-localhost-5173-2024-03-30-01_46_33](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/a1ddbfe5-390b-434e-a3e6-e53572a95d16)
+
+.
+
+Student - my course list
+
+![image](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/115a509e-7140-4408-a9b1-60d0b74bf18f)
+
+
+
 
 
 
