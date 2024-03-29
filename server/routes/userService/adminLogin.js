@@ -13,8 +13,8 @@ router.post("/", async (req, res) => {
   const { email, password } = req.body;
 
   const userFromDb = await User.findOne({
-    email: email,
-    userType : "STUDENT",
+       userType : "ADMIN",
+       email: email, 
   }).lean();
 
   try {
