@@ -14,7 +14,7 @@ import './product-card.css';
 
 // ----------------------------------------------------------------------
 
-export default function ShopProductCard({ product, handleEditClickedProduct, handleDeleteClickedProduct }) {
+export default function ShopProductCard({ product, handleEditClickedCourse, handleDeleteClickedCourse }) {
 
 
   const renderImg = (
@@ -41,7 +41,7 @@ export default function ShopProductCard({ product, handleEditClickedProduct, han
   const renderEditIcon = (
     <Box
       className='edit-icon'
-      onClick={()=> {handleEditClickedProduct(product)}}
+      onClick={()=> {handleEditClickedCourse(product)}}
     >
       <img
       id= {`${product.id} + _edit_icon`}
@@ -56,7 +56,7 @@ export default function ShopProductCard({ product, handleEditClickedProduct, han
   const renderDeleteIcon = (
     <Box
       className='delete-icon'
-      onClick={()=> {handleDeleteClickedProduct(product)}}
+      onClick={()=> {handleDeleteClickedCourse(product)}}
     >
     <img
       id= {`${product.id} + _delete_icon`}
@@ -94,6 +94,6 @@ export default function ShopProductCard({ product, handleEditClickedProduct, han
 
 ShopProductCard.propTypes = {
   product: PropTypes.object,
-  handleEditClickedProduct: PropTypes.func,
-  handleDeleteClickedProduct: PropTypes.func
+  handleEditClickedCourse: PropTypes.func,
+  handleDeleteClickedCourse: PropTypes.func
 };

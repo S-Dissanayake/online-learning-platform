@@ -105,7 +105,7 @@ export default function ProductsView() {
     }
     const token = `Bearer ${sessionStorage.getItem('auth-token')}`;
     const config = { headers: { Authorization: token}}
-    axios.post(`${API_URL}/api/addCourse`, payload, config)
+    axios.post(`${API_URL}/api/course/addCourse`, payload, config)
     .then(res => {
       if(res.data.error) {
         setSnackData({text: "Error on adding course !", variant: "error"})
@@ -220,7 +220,7 @@ export default function ProductsView() {
 
           <Grid item>
             <Button 
-              sx={{m:"2rem 1rem 0 0", minWidth: "10rem"}}
+              sx={{m:"1rem 1rem 0 0", minWidth: "10rem"}}
               variant="contained"
               onClick={()=>{handleSubmit()}}
               className='add-product-btn'

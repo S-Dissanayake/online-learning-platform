@@ -16,42 +16,39 @@ import Snackbar from "../../../components/Snackbar/Snackbar";
 // ----------------------------------------------------------------------
 
 export default function ProductsView() {
-  const [productList, setProductList] = useState([]);
+  const [courseList, setCourseList] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [productDetailsForDelete, setProductDetailsForDelete] = useState({});
+  const [courseDetailsForDelete, setCourseDetailsForDelete] = useState({});
   const [productDetailsForEdit, setProductDetailsForEdit] = useState({});
   const[snackData, setSnackData]= useState({text: "", variant: ""});
 
   useEffect(() => {
-    getAllProducts();
+    getAllCourses();
   }, [])
 
-  const handleEditClickedProduct =(editData)=> {
+  const handleEditClickedCourse =(editData)=> {
     setProductDetailsForEdit(editData);
     setIsDialogOpen(true);
   }
 
-  const handleDeleteClickedProduct =(data)=> {
-    setProductDetailsForDelete(data)
+  const handleDeleteClickedCourse =(data)=> {
+    setCourseDetailsForDelete(data)
     setIsDeleteDialogOpen(true);
   }  
 
-  const getAllProducts =()=> {
-    axios.get(`${API_URL}/getAllProducts`)
+  const getAllCourses =()=> {
+    axios.get(`${API_URL}/api/course/getAllCoursesList/`)
     .then(res => {
       if(res.data.error) {
         alert("Error on get All product")
       } else if(res.data) {
-        setProductList(res.data);
+        setCourseList(res.data.result);
       } else {
         alert("Error on get All product")
       }
     })
     .catch(err => console.log(err));
-
-    setProductList(dummy_data);
-
   }
 
   const handleSnackReset = () => {
@@ -71,7 +68,7 @@ export default function ProductsView() {
           isDialogOpen={isDialogOpen}
           setIsDialogOpen={()=> {setIsDialogOpen()}}
           product={productDetailsForEdit}
-          getAllProducts={()=> {getAllProducts()}}
+          getAllCourses={()=> {getAllCourses()}}
         />
       }
       {
@@ -79,8 +76,8 @@ export default function ProductsView() {
         <DeleteProduct 
           isDeleteDialogOpen={isDeleteDialogOpen} 
           setIsDeleteDialogOpen={()=> {setIsDeleteDialogOpen(false)}}
-          productDetailsForDelete={productDetailsForDelete}
-          getAllProducts={()=> {getAllProducts()}}
+          courseDetailsForDelete={courseDetailsForDelete}
+          getAllCourses={()=> {getAllCourses()}}
           setSnackData={(data)=> {setSnackData(data)}}
         />
       }    
@@ -90,12 +87,12 @@ export default function ProductsView() {
         </Typography>
 
         <Grid container spacing={3}>
-          {productList.map((product) => (
+          {courseList.map((product) => (
             <Grid key={product.id} xs={12} sm={6} md={3}>
               <ProductCard 
                 product={product}
-                handleEditClickedProduct={(productData)=>{handleEditClickedProduct(productData)}}
-                handleDeleteClickedProduct={(data)=> {handleDeleteClickedProduct(data)}}
+                handleEditClickedCourse={(productData)=>{handleEditClickedCourse(productData)}}
+                handleDeleteClickedCourse={(data)=> {handleDeleteClickedCourse(data)}}
               />
             </Grid>
           ))}
@@ -105,30 +102,3 @@ export default function ProductsView() {
   );
 }
 
-
-const dummy_data = [
-  {
-    id: 1,
-    name: 'fsdfhk',
-    imageUrl: '',
-    price: "20.00"
-  },
-  {
-    id: 2,
-    name: 'fsdfhk',
-    imageUrl: '',
-    price: "20.00"
-  },
-  {
-    id: 3,
-    name: 'fsdfhk',
-    imageUrl: '',
-    price: "20.00"
-  },
-  {
-    id: 4,
-    name: 'fsdfhk',
-    imageUrl: '',
-    price: "20.00"
-  },
-]

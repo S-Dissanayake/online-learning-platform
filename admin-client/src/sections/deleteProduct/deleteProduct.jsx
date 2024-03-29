@@ -23,8 +23,8 @@ export default function DeleteProduct(props) {
   const  {
       isDeleteDialogOpen,
       setIsDeleteDialogOpen,
-      productDetailsForDelete,
-      getAllProducts,
+      courseDetailsForDelete,
+      getAllCourses,
       setSnackData,
   }  = props;
   
@@ -33,7 +33,7 @@ export default function DeleteProduct(props) {
   };
 
   const handleImageDelete = () => {
-    const imageRef = ref(storage, productDetailsForDelete.imageUrl)
+    const imageRef = ref(storage, courseDetailsForDelete.imageUrl)
     deleteObject(imageRef)
     .then(() => {
       console.log("image deleted");
@@ -44,20 +44,20 @@ export default function DeleteProduct(props) {
   }
 
   const handleDelete = () => {
-    const id = productDetailsForDelete?.id;
+    const name = courseDetailsForDelete?.name;
     const token = `Bearer ${sessionStorage.getItem('auth-token')}`;
     const config = { headers: { Authorization: token}}
-    axios.delete(`${API_URL}/deleteProduct/${id}`,config)
+    axios.delete(`${API_URL}/api/course/deleteCourse/${name}`,config)
     .then(res => {
       if(res.data.error) {
-        setSnackData({text: "Error on Product Delete", variant: "error"});
+        setSnackData({text: "Error on Course Delete", variant: "error"});
       } else if(res.data) {
         handleImageDelete();
         setIsDeleteDialogOpen(false);
-        setSnackData({text: "Product Deleted Successfully", variant: "success"});
-        getAllProducts();
+        setSnackData({text: "Course Deleted Successfully", variant: "success"});
+        getAllCourses();
       } else {
-        setSnackData({text: "Error on Product Delete", variant: "error"});
+        setSnackData({text: "Error on Course Delete", variant: "error"});
       }
     })
     .catch(err =>{
@@ -77,7 +77,7 @@ export default function DeleteProduct(props) {
           padding: ' 0 5px ' 
         }}
       >
-         {productDetailsForDelete.name}  
+         {courseDetailsForDelete.name}  
       </Typography>
       ?
     </Typography>
@@ -120,7 +120,7 @@ export default function DeleteProduct(props) {
 DeleteProduct.propTypes = {
   isDeleteDialogOpen: PropTypes.bool,
   setIsDeleteDialogOpen: PropTypes.func,
-  productDetailsForDelete: PropTypes.object,
-  getAllProducts: PropTypes.func,
+  courseDetailsForDelete: PropTypes.object,
+  getAllCourses: PropTypes.func,
   setSnackData: PropTypes.func
 };

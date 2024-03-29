@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const Course = require("../../models/course/course");
 
-router.get("/getAllCourses/", async (req, res) => {
+router.get("/getAllCoursesList/", async (req, res) => {
   try {
     const courses = await Course.find();
     res.status(200).json({
@@ -24,18 +24,18 @@ router.get("/getAllCourses/", async (req, res) => {
 
 router.post("/addCourse/",
     async (req, res) => {
-      const productNew = new Course({
+      const newCourse = new Course({
         name: req.body.name,
         price: req.body.price,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
       });  
       try {
-        const result = await productNew.save();
+        const result = await newCourse.save();
         res.status(201).json({
           status: "200 OK",
           result: result,
-          user: productNew,
+          user: newCourse,
           message: "Course created Successfully",
         });
       } catch (err) {
@@ -48,12 +48,41 @@ router.post("/addCourse/",
     }
 );
 
-router.delete("/deleteCourse/",
+router.put("/updateCourse/:name",
     async (req, res) => {
-      const name = req.body;
+      const filter = { 
+        name: req.params.name,
+      }
 
+      const updateDocument = {
+        $set: {
+          name: req.body.name,
+          price: req.body.price,
+          description: req.body.description,
+          imageUrl: req.body.imageUrl,
+        }
+      };
+
+      try {
+        const result = await Course.updateOne(filter, updateDocument);
+        res.status(201).json({
+          status: "200 OK",
+          message: "Course Updated Successfully",
+        });
+      } catch (err) {
+        return res.status(400).json({
+          error: err.error,
+          errorMessage: err.message,
+          message: "Error while Updating the course",
+        });
+      }
+    }
+);
+
+router.delete("/deleteCourse/:name",
+    async (req, res) => {
       const courseFromDb = await Course.findOne({
-        name: name,
+        name: req.params.name,
       }).lean();
 
       try {
@@ -61,14 +90,14 @@ router.delete("/deleteCourse/",
         res.status(201).json({
           status: "200 OK",
           result: result,
-          user: product,
-          message: "Course created Successfully",
+          user: courseFromDb,
+          message: "Course Deleted Successfully",
         });
       } catch (err) {
         return res.status(400).json({
           error: err.error,
           errorMessage: err.message,
-          message: "Error while creating the user",
+          message: "Error while deleting the course",
         });
       }
     }
