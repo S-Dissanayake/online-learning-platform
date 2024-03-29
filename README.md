@@ -18,6 +18,10 @@ install Node modules : npm install
 
 run the development server : npm run dev
 
+You can create new student and login by provided email and password
+
+.
+
 # Frontend - Admin interface
 
 Getting Started
@@ -26,9 +30,14 @@ install Node modules : npm install
 
 run the development server : npm run dev
 
-    admin email : admin@gmail.com
+    Login Details for admin
     
-    admin password : admin123
+        admin email : admin@gmail.com
+        
+        admin password : admin123
+
+
+# User Interfaces    
     
 admin -  Login Screen
 
