@@ -1,5 +1,7 @@
 # online-learning-platform
 
+On this platform there are two user interfaces , one is for Students and onther one is for Admin. both users are connecting to same backend server.
+
 # Backend
 Getting Started
 
