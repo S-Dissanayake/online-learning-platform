@@ -88,6 +88,12 @@ Student - my course list
 
 ![image](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/115a509e-7140-4408-a9b1-60d0b74bf18f)
 
+.
+
+Student - Sign up
+
+![screencapture-localhost-5173-login-2024-03-30-01_55_57](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/f83be352-a1ca-4e99-ab27-87783c050c9c)
+
 
 
 
