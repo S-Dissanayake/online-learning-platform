@@ -25,15 +25,15 @@ export default FeedbackCorner
 const data = [
     {
         name: "Thea Kristiansen",
-        msg: "The customer experience was exceptional from start to finish. Very Quality fishes and Good service, I'm beyond satisfied!",
+        msg: "The customer experience was exceptional from start to finish. Very Quality Courses and Good service, I'm beyond satisfied!",
     },
     {
         name: "Henrik Larsen",
-        msg: "I absolutely love the fishes I purchased from this website. customer service was outstanding, Highly recommended!",
+        msg: "I absolutely love the Course I purchased from this website. Course content was outstanding, Highly recommended!",
     },
     {
         name: "Sander Jakobsen",
-        msg: "I had a great experience shopping on this website. Quality fishes & good varieties for selection. ",
+        msg: "I had a great experience learning on this website. Quality online courses. ",
     }
 
 ]

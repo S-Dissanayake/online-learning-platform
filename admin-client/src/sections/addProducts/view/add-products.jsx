@@ -220,7 +220,7 @@ export default function ProductsView() {
 
           <Grid item>
             <Button 
-              sx={{m:"1rem 1rem 0 0", minWidth: "10rem"}}
+              sx={{m:"2rem 1rem 0 0", minWidth: "10rem"}}
               variant="contained"
               onClick={()=>{handleSubmit()}}
               className='add-product-btn'
