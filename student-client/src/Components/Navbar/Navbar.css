@@ -80,6 +80,17 @@ nav .menu span {
   border-radius: 0.2rem;
 }
 
+.nav-login {
+  padding-right: 20px;
+}
+
+.nav-login-btn {
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  padding: 5px 10px 5px 10px !important;
+  text-transform: capitalize !important;
+}
+
 @media (max-width: 480px) {
   nav .menu {
       display: flex;

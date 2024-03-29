@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import { Link, NavLink } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import logo from '../Assets/nav-logo.png'
 
+import { useRouter } from '../../routes/hooks/use-router'
+
 const Navbar = () => {
+  const router = useRouter();
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLogedin, setIsLogedin] = useState(false);
+
+  const loginOnclickHandler = () => {
+    router.push('/login');
+  }
 
   return (
     <nav className='nav'>
@@ -22,7 +32,7 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/mycourses">My Courses</NavLink>
+          <NavLink to="/courses">Courses</NavLink>
         </li>
         <li>
           <NavLink to="/aboutus">About Us</NavLink>
@@ -31,7 +41,10 @@ const Navbar = () => {
           <NavLink to="/contact">Contact</NavLink>
         </li>
       </ul>
-      <div className="nav-login-cart">
+      <div className="nav-login">
+        <Button className="nav-login-btn" onClick={()=> {loginOnclickHandler()}}>
+          {isLogedin ? "logout" : "sign in"}
+        </Button>
       </div>
     </nav>
   )

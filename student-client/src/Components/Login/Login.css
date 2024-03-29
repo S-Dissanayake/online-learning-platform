@@ -1,0 +1,12 @@
+.login-container {
+    margin: 80px 0;
+}
+
+.account-check-stack {
+    display: flex !important;
+}
+
+.account-check-btn {
+    text-transform: capitalize !important;
+    padding: '0px' !important;
+}

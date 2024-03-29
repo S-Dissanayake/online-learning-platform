@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Container, Grid, Typography,  } from '@mui/material'
 import axios from 'axios'
 
-import "./CSS/MyCourses.css"
+import "./CSS/Courses.css"
 
-const MyCourses = () => {
+const Courses = () => {
 
   const [productList, setProductList] = useState([]);
   
@@ -52,4 +52,4 @@ const MyCourses = () => {
     </Container>
   )
 }
-export default MyCourses
+export default Courses

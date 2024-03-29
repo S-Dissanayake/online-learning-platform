@@ -1,11 +1,12 @@
 import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import MyCourses from "./Pages/MyCourses";
+import Courses from "./Pages/Courses";
 import AboutUs from "./Pages/AboutUs";
 import Contact from "./Pages/Contact";
 import Footer from "./Components/Footer/Footer";
 import ProductDisplay from './Components/ProductDisplay/ProductDisplay';
+import Login from "./Components/Login/Login";
 
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/mycourses" element={<MyCourses />} />
+          <Route path="/courses" element={<Courses />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path='/product' element={<ProductDisplay />}>
             <Route path=':productId' element={<ProductDisplay />} />
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </Router>
