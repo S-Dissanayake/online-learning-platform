@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -15,10 +14,13 @@ router.post("/", async (req, res) => {
 
   const userFromDb = await User.findOne({
     email: email,
+    userType : "STUDENT",
   }).lean();
 
+  console.log(" userFromDb ", userFromDb);
+
   try {
-    if (await bcrypt.compare(password, userFromDb.password)) {
+    if (await password === userFromDb.password ) {
       const webToken = jwt.sign(
         {
           id: userFromDb._id,
@@ -29,6 +31,7 @@ router.post("/", async (req, res) => {
 
       res.json({
         status: "200 OK",
+        login: true,
         token: webToken,
         message: "user Information Successfully Validated",
         user: userFromDb,

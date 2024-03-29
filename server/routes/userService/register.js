@@ -1,21 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const User = require("../../models/user/register");
 
 router.post("/", async (req, res) => {
-  const pwd = req.body.password;
-
-  const hashedPassword = await bcrypt.hash(pwd, 10);
 
   const register = new User({
     name: req.body.name,
-    password: hashedPassword,
+    password: req.body.password,
     email: req.body.email,
-    userType: req.body.userType,
+    userType: "STUDENT",
   });
 
   try {
@@ -26,8 +22,8 @@ router.post("/", async (req, res) => {
       },
       process.env.JWT_SECRET
     );
-
     res.status(201).json({
+      signup: true,
       status: "200 OK",
       token: webToken,
       result: result,
