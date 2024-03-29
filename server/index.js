@@ -1,15 +1,10 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
-const HOST = process.env.HOST ;
-const USER = process.env.USER ;
-const PASSWORD = process.env.PASSWORD ;
-const PORT = process.env.PORT ;
-const DATABASE = process.env.DATABASE ;
 
 const app = express();
 app.use(express.json());
@@ -17,13 +12,19 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-const db = mysql.createConnection({
-    host: HOST,
-    user: USER,
-    password: PASSWORD,
-    port: PORT,
-    database: DATABASE
-})
+// database connections
+mongoose.set("strictQuery", false);
+mongoose.connect(
+    process.env.URL_DB,
+    { useNewUrlParser: true },
+    { useUnifiedTopology: false }
+  )
+  .then(() => {
+    console.log("DB Connected");
+  })
+  .catch((err) => {
+    console.log(JSON.stringify(err));
+  });
 
 function verifyToken(req,res,next){
     const bearerHeader=req.headers["authorization"];
@@ -36,10 +37,6 @@ function verifyToken(req,res,next){
         res.sendStatus(403);
     }
 }
-
-app.get("/", (req, res)=> {
-    res.json("this is from backend  /")
-})
 
 // API for user creation
 app.post('/signup', (req, res) => {
