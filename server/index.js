@@ -25,18 +25,6 @@ mongoose.connect(
     console.log(JSON.stringify(err));
   });
 
-// function verifyToken(req,res,next){
-//     const bearerHeader=req.headers["authorization"];
-//     if(typeof bearerHeader!=='undefined'){
-//         const bearer = bearerHeader.split(' ');
-//         const bearerToken=bearer[1];
-//         req.token=bearerToken;
-//         next()
-//     }else {
-//         res.sendStatus(403);
-//     }
-// }
-
 const registerRoute = require("./routes/userService/register");
 const loginRoute = require("./routes/userService/login");
 const adminLoginRoute = require("./routes/userService/adminLogin");
