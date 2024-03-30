@@ -43,11 +43,11 @@ router.get("/view_one", async (req, res) => {
   }
 });
 
-router.post("/update-profile", async (req, res) => {
-  const { updatedPhoneNumber } = req.body;
+router.put("/update_student", async (req, res) => {
+  const { id, name, email, password } = req.body;
 
   const user = await User.findOne({
-    email: req.body.email,
+    _id: id,
   }).lean();
 
   if (!user) {
@@ -61,9 +61,13 @@ router.post("/update-profile", async (req, res) => {
 
   try {
     const response = await User.updateOne(
-      { _id: user._id },
+      { _id: id },
       {
-        $set: { phoneNumber: updatedPhoneNumber },
+        $set: { 
+          name: name,
+          email: email,
+          password: password
+        },
       }
     );
 
@@ -102,5 +106,30 @@ router.get("/get_all_students", async (req, res) => {
     });
   }
 });
+
+router.delete("/deleteStudent/:id",
+    async (req, res) => {
+      const studentFromDb = await User.findOne({
+        _id: req.params.id,
+        userType: "STUDENT"
+      }).lean();
+
+      try {
+        const result = await User.deleteOne(studentFromDb);
+        res.status(201).json({
+          status: "200 OK",
+          result: result,
+          user: studentFromDb,
+          message: "User Deleted Successfully",
+        });
+      } catch (err) {
+        return res.status(400).json({
+          error: err.error,
+          errorMessage: err.message,
+          message: "Error while deleting the User",
+        });
+      }
+    }
+);
 
 module.exports = router;
