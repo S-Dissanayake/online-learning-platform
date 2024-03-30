@@ -32,7 +32,8 @@ You can create new student and login by provided email and password
 
 # Frontend - Admin interface
 
-Getting Started
+Note :- A free React admin dashboard, made with Material UI components and React, has been used as a starter template.
+https://mui.com/store/items/minimal-dashboard-free/
 
 install Node modules : npm install
 
