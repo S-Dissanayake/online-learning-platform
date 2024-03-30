@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
 import { format } from 'date-fns';
+import { useState, useEffect } from 'react';
 
 import { Box, Grid, Button, Container,  TextField, Typography, FormControl, OutlinedInput, } from '@mui/material';
 
@@ -32,6 +32,12 @@ export default function StudentManagement() {
   const[formErrors, setFormErrors]= useState(initialFormErrors);
   const[editMode, setEditMode]= useState(false);
   const[snackData, setSnackData]= useState({text: "", variant: ""});
+  const[studentList, setStudentList]= useState([]);
+
+  useEffect(() => {
+    fetchAllStudents();
+  }, [])
+  
 
   const handleFormValues =(e)=> {
     setFormValues({...formValues, [e.target.name]: e.target.value});
@@ -110,6 +116,20 @@ export default function StudentManagement() {
       }
     )
     setIsFormView(true)
+  }
+
+  const fetchAllStudents = () => {
+      axios.get(`${API_URL}/api/user/get_all_students`)
+      .then(res => {
+        if(res.data.error) {
+          alert("Error on get All students")
+        } else if(res.data) {
+          setStudentList(res.data.result);
+        } else {
+          alert("Error on get All students")
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   return (
@@ -215,7 +235,7 @@ export default function StudentManagement() {
         </Grid>
       </form>
       }
-      {student_list &&
+      {studentList &&
         <Grid container item xs={12} className='student-table-titile'>
         <Grid container item xs={12} md={3} >
           Name
@@ -229,7 +249,7 @@ export default function StudentManagement() {
         <Grid container item xs={12} md={3}> Actions</Grid> 
         </Grid>
       }
-      {student_list.map((student)=> <Grid container item xs={12} className='student-table'>
+      {studentList.map((student)=> <Grid container item xs={12} className='student-table'>
         <Grid container item xs={12} md={3} >
           {student.name}
         </Grid>
@@ -271,31 +291,3 @@ export default function StudentManagement() {
     </Container>
   );
 }
-
-
-const student_list = [
-  {
-    id: 1,
-    name: "saman",
-    email: "saman@gmail.com",
-    password: "saman123"
-  },
-  {
-    id: 2,
-    name: "kasun",
-    email: "kasun@gmail.com",
-    password: "kasun123"
-  },
-  {
-    id: 3,
-    name: "nirmal",
-    email: "nirmal@gmail.com",
-    password: "nirmal123"
-  },
-  {
-    id: 4,
-    name: "banuka",
-    email: "banuka@gmail.com",
-    password: "banuka123"
-  },
-]

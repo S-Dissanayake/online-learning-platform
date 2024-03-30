@@ -82,4 +82,25 @@ router.post("/update-profile", async (req, res) => {
   }
 });
 
+router.get("/get_all_students", async (req, res) => {
+  try {
+    const user = await User.find({
+      userType: "STUDENT",
+    });
+
+    res.status(200).json({
+      status: "202 OK",
+      message: "Users fetched successfully",
+      result: user,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "Error",
+      message: "Error while getting the user list",
+      error: error,
+      errorMessage: error.message,
+    });
+  }
+});
+
 module.exports = router;
