@@ -77,6 +77,12 @@ admin - Deleting selected Course
 ![image](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/ad09468f-8032-4e89-9987-e7ffbd6aced7)
 
 .
+
+Student Management 
+
+![image](https://github.com/S-Dissanayake/online-learning-platform/assets/89515541/00ee3103-a5bc-41d7-9266-c85c548719a7)
+
+.
 .
 
 Student - home page
