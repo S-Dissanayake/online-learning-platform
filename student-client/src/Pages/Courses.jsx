@@ -1,11 +1,10 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Grid, Typography,  } from '@mui/material'
-import axios from 'axios'
 import ProductCard from '../Components/ProductCard/product-card';
 import "./CSS/Courses.css"
 
 const Courses = () => {
-
   const userName = sessionStorage.getItem('userName');
   const [courseList, setCoursetList] = useState([]);
 
@@ -13,8 +12,6 @@ const Courses = () => {
     userName && fetchInfo();
   }, [])
   
-  
-
   const fetchInfo = () => { 
     axios.post('http://localhost:8800/api/coursesByStudent/getAll/', {'userName': userName})
     .then(res => {
