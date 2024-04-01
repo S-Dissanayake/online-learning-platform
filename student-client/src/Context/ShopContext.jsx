@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 
 export const ShopContext = createContext(null);
 
@@ -16,27 +16,6 @@ const ShopContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
-  useEffect(() => {
-    // fetch('http://localhost:4000/allproducts') 
-    //       .then((res) => res.json()) 
-    //       .then((data) => setProducts(data))
-
-    // if(localStorage.getItem("auth-token"))
-    // {
-    //   fetch('http://localhost:4000/getcart', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept:'application/form-data',
-    //     'auth-token':`${localStorage.getItem("auth-token")}`,
-    //     'Content-Type':'application/json',
-    //   },
-    //   body: JSON.stringify(),
-    // })
-    //   .then((resp) => resp.json())
-    //   .then((data) => {setCartItems(data)});
-    // }
-
-}, [])
   
   const getTotalCartAmount = () => {
     let totalAmount = 0;
